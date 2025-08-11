@@ -1,0 +1,72 @@
+{
+  "name": "cloud-team-copilot-agents",
+  "displayName": "Cloud Team Copilot Agents",
+  "description": "Centralized custom GitHub Copilot agents for cloud engineering team",
+  "version": "1.0.0",
+  "publisher": "cloud-engineering-team",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Cloud Team Copilot Agents",
+      "properties": {
+        "cloudTeamCopilotAgents.repositoryUrl": {
+          "type": "string",
+          "default": "",
+          "description": "URL of the Git repository containing agent definitions"
+        },
+        "cloudTeamCopilotAgents.updateInterval": {
+          "type": "number",
+          "default": 300000,
+          "description": "Update check interval in milliseconds (default: 5 minutes)"
+        },
+        "cloudTeamCopilotAgents.branch": {
+          "type": "string",
+          "default": "master",
+          "description": "Branch to fetch agent definitions from"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "cloudTeamCopilotAgents.refreshAgents",
+        "title": "Cloud Team Agents: Refresh Agents"
+      },
+      {
+        "command": "cloudTeamCopilotAgents.configureRepository",
+        "title": "Cloud Team Agents: Configure Repository"
+      },
+      {
+        "command": "cloudTeamCopilotAgents.showAgentStatus",
+        "title": "Cloud Team Agents: Show Agent Status"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "test": "npm run compile && node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "@vscode/vsce": "^2.22.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "node-fetch": "^3.3.2",
+    "simple-git": "^3.20.0"
+  }
+}
